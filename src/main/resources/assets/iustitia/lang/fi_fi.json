@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8(ei luettavissa)",
   "iustitia.screen.keybinds.conflict": "§c⚠ ristiriidassa kohteen §f%s kanssa",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§lNäppäinyhdistelmät",
-  "iustitia.screen.keybinds.hint": "§7Muuta näitä §fAsetukset → Näppäimet → Sekalaiset§7 -osassa. Punainen = näppäimen ristiriita.",
+  "iustitia.screen.keybinds.hint": "§7Muuta näitä §fAsetukset → Näppäimet → Iustitia§7 -osassa. Punainen = näppäimen ristiriita.",
   "iustitia.screen.keybinds.title": "Iustitia — näppäinyhdistelmät",
   "iustitia.screen.keybinds.unregistered": "§crekisteröimätön",
   "iustitia.screen.playerHistory.checkFilter": "§7[§fTarkistus: %s§7]",

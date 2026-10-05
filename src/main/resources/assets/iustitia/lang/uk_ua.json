@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8(нечитабельний)",
   "iustitia.screen.keybinds.conflict": "§c⚠ конфліктує з §f%s",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§lЦентр клавіш",
-  "iustitia.screen.keybinds.hint": "§7Змініть будь-яку з цих прив'язок у §fНалаштування → Керування → Різне§7. Червоний = конфлікт клавіш.",
+  "iustitia.screen.keybinds.hint": "§7Змініть будь-яку з цих прив'язок у §fНалаштування → Керування → Iustitia§7. Червоний = конфлікт клавіш.",
   "iustitia.screen.keybinds.title": "Iustitia — центр клавіш",
   "iustitia.screen.keybinds.unregistered": "§cне зареєстровано",
   "iustitia.screen.playerHistory.checkFilter": "§7[§fПеревірка: %s§7]",

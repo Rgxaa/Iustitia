@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8（不可讀）",
   "iustitia.screen.keybinds.conflict": "§c⚠ 與 §f%s 相衝",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§l鍵位之樞",
-  "iustitia.screen.keybinds.hint": "§7於 §f置設 → 控 → 雜物§7 可改其鍵。赤者，鍵相衝也。",
+  "iustitia.screen.keybinds.hint": "§7於 §f置設 → 控 → Iustitia§7 可改其鍵。赤者，鍵相衝也。",
   "iustitia.screen.keybinds.title": "Iustitia — 鍵位之樞",
   "iustitia.screen.keybinds.unregistered": "§c未註冊",
   "iustitia.screen.playerHistory.checkFilter": "§7[§f檢: %s§7]",

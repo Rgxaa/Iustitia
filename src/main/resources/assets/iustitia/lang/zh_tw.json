@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8（無法讀取）",
   "iustitia.screen.keybinds.conflict": "§c⚠ 與 §f%s 衝突",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§l按鍵設定中心",
-  "iustitia.screen.keybinds.hint": "§7在 §f選項 → 按鍵設定 → 雜項§7 重新綁定。紅色＝按鍵衝突。",
+  "iustitia.screen.keybinds.hint": "§7在 §f選項 → 按鍵設定 → Iustitia§7 重新綁定。紅色＝按鍵衝突。",
   "iustitia.screen.keybinds.title": "Iustitia — 按鍵設定中心",
   "iustitia.screen.keybinds.unregistered": "§c未註冊",
   "iustitia.screen.playerHistory.checkFilter": "§7[§f檢查: %s§7]",

@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8(không đọc được)",
   "iustitia.screen.keybinds.conflict": "§c⚠ xung đột với §f%s",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§lTrung tâm phím tắt",
-  "iustitia.screen.keybinds.hint": "§7Đổi phím bất kỳ trong số này ở §fOptions → Controls → Miscellaneous§7. Màu đỏ = phím xung đột.",
+  "iustitia.screen.keybinds.hint": "§7Đổi phím bất kỳ trong số này ở §fOptions → Controls → Iustitia§7. Màu đỏ = phím xung đột.",
   "iustitia.screen.keybinds.title": "Iustitia — trung tâm phím tắt",
   "iustitia.screen.keybinds.unregistered": "§ckhông đăng ký",
   "iustitia.screen.playerHistory.checkFilter": "§7[§fCheck: %s§7]",

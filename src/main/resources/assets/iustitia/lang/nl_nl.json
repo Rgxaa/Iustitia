@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8(onleesbaar)",
   "iustitia.screen.keybinds.conflict": "§c⚠ conflicteert met §f%s",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§lSneltoetsoverzicht",
-  "iustitia.screen.keybinds.hint": "§7Wijzig elke sneltoets in §fOpties → Besturing → Diversen§7. Rood = toetsconflict.",
+  "iustitia.screen.keybinds.hint": "§7Wijzig elke sneltoets in §fOpties → Besturing → Iustitia§7. Rood = toetsconflict.",
   "iustitia.screen.keybinds.title": "Iustitia — sneltoetsoverzicht",
   "iustitia.screen.keybinds.unregistered": "§cniet geregistreerd",
   "iustitia.screen.playerHistory.checkFilter": "§7[§fCheck: %s§7]",

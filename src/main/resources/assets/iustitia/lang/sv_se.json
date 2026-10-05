@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8(oläsbar)",
   "iustitia.screen.keybinds.conflict": "§c⚠ krockar med §f%s",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§lTangentbindningar",
-  "iustitia.screen.keybinds.hint": "§7Byt tangent på något av dessa under §fAlternativ → Kontroller → Diverse§7. Rött = tangentkonflikt.",
+  "iustitia.screen.keybinds.hint": "§7Byt tangent på något av dessa under §fAlternativ → Kontroller → Iustitia§7. Rött = tangentkonflikt.",
   "iustitia.screen.keybinds.title": "Iustitia — tangentbindningar",
   "iustitia.screen.keybinds.unregistered": "§cej registrerad",
   "iustitia.screen.playerHistory.checkFilter": "§7[§fKontroll: %s§7]",

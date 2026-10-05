@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8(nicht lesbar)",
   "iustitia.screen.keybinds.conflict": "§c⚠ kollidiert mit §f%s",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§lTastenkürzel-Hub",
-  "iustitia.screen.keybinds.hint": "§7Belege hier in §fOptionen → Steuerung → Sonstiges§7 neu zuweisen. Rot = Tastenkonflikt.",
+  "iustitia.screen.keybinds.hint": "§7Belege hier in §fOptionen → Steuerung → Iustitia§7 neu zuweisen. Rot = Tastenkonflikt.",
   "iustitia.screen.keybinds.title": "Iustitia — Tastenkürzel-Hub",
   "iustitia.screen.keybinds.unregistered": "§cnicht registriert",
   "iustitia.screen.playerHistory.checkFilter": "§7[§fCheck: %s§7]",

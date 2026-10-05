@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8(ulæselig)",
   "iustitia.screen.keybinds.conflict": "§c⚠ konflikter med §f%s",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§lGenvejstaster",
-  "iustitia.screen.keybinds.hint": "§7Tilknyt en hvilken som helst af disse igen i §fIndstillinger → Kontroller → Diverse§7. Rød = tastekonflikt.",
+  "iustitia.screen.keybinds.hint": "§7Tilknyt en hvilken som helst af disse igen i §fIndstillinger → Kontroller → Iustitia§7. Rød = tastekonflikt.",
   "iustitia.screen.keybinds.title": "Iustitia — genvejstaster",
   "iustitia.screen.keybinds.unregistered": "§curegistreret",
   "iustitia.screen.playerHistory.checkFilter": "§7[§fKontrol: %s§7]",

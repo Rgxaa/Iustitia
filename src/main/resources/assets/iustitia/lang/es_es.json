@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8(no legible)",
   "iustitia.screen.keybinds.conflict": "§c⚠ entra en conflicto con §f%s",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§lCentro de atajos",
-  "iustitia.screen.keybinds.hint": "§7Cambia cualquiera de estos atajos en §fOpciones → Controles → Varios§7. Rojo = conflicto de teclas.",
+  "iustitia.screen.keybinds.hint": "§7Cambia cualquiera de estos atajos en §fOpciones → Controles → Iustitia§7. Rojo = conflicto de teclas.",
   "iustitia.screen.keybinds.title": "Iustitia — centro de atajos",
   "iustitia.screen.keybinds.unregistered": "§csin registrar",
   "iustitia.screen.playerHistory.checkFilter": "§7[§fComprobación: %s§7]",

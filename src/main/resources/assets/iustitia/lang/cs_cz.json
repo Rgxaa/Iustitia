@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8(nelze přečíst)",
   "iustitia.screen.keybinds.conflict": "§c⚠ koliduje s §f%s",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§lKlávesové zkratky",
-  "iustitia.screen.keybinds.hint": "§7Přemapovat můžeš v §fNastavení → Ovládání → Různé§7. Červená = konflikt klávesy.",
+  "iustitia.screen.keybinds.hint": "§7Přemapovat můžeš v §fNastavení → Ovládání → Iustitia§7. Červená = konflikt klávesy.",
   "iustitia.screen.keybinds.title": "Iustitia — klávesové zkratky",
   "iustitia.screen.keybinds.unregistered": "§cneregistrováno",
   "iustitia.screen.playerHistory.checkFilter": "§7[§fKontrola: %s§7]",

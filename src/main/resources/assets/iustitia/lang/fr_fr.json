@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8(illisible)",
   "iustitia.screen.keybinds.conflict": "§c⚠ entre en conflit avec §f%s",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§lHub des touches",
-  "iustitia.screen.keybinds.hint": "§7Reassignez l'une de ces touches dans §fOptions → Contrôles → Divers§7. Rouge = conflit de touche.",
+  "iustitia.screen.keybinds.hint": "§7Reassignez l'une de ces touches dans §fOptions → Contrôles → Iustitia§7. Rouge = conflit de touche.",
   "iustitia.screen.keybinds.title": "Iustitia — hub des touches",
   "iustitia.screen.keybinds.unregistered": "§cnon enregistré",
   "iustitia.screen.playerHistory.checkFilter": "§7[§fCheck : %s§7]",

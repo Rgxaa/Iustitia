@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8(nem olvasható)",
   "iustitia.screen.keybinds.conflict": "§c⚠ ütközik ezzel: §f%s",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§lBillentyűparancs-központ",
-  "iustitia.screen.keybinds.hint": "§7Itt állíthatsz át bármit: §fBeállítások → Irányítás → Egyéb§7. Piros = billentyű-ütközés.",
+  "iustitia.screen.keybinds.hint": "§7Itt állíthatsz át bármit: §fBeállítások → Irányítás → Iustitia§7. Piros = billentyű-ütközés.",
   "iustitia.screen.keybinds.title": "Iustitia — billentyűparancs-központ",
   "iustitia.screen.keybinds.unregistered": "§cnem regisztrált",
   "iustitia.screen.playerHistory.checkFilter": "§7[§fEllenőrzés: %s§7]",

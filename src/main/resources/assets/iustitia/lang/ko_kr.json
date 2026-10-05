@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8(읽을 수 없음)",
   "iustitia.screen.keybinds.conflict": "§c⚠ §f%s과(와) 충돌",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§l단축키 허브",
-  "iustitia.screen.keybinds.hint": "§7§f설정 → 조작 → 기타§7에서 재배정할 수 있습니다. 빨강 = 키 충돌.",
+  "iustitia.screen.keybinds.hint": "§7§f설정 → 조작 → Iustitia§7에서 재배정할 수 있습니다. 빨강 = 키 충돌.",
   "iustitia.screen.keybinds.title": "Iustitia — 단축키 허브",
   "iustitia.screen.keybinds.unregistered": "§c미등록",
   "iustitia.screen.playerHistory.checkFilter": "§7[§f체크: %s§7]",

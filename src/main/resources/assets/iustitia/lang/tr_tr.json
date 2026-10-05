@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8(okunamıyor)",
   "iustitia.screen.keybinds.conflict": "§c⚠ şununla çakışıyor: §f%s",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§lKısayol merkezi",
-  "iustitia.screen.keybinds.hint": "§7Bunlardan herhangi birini §fAyarlar → Kontroller → Çeşitli§7 bölümünden yeniden bağla. Kırmızı = tuş çakışması.",
+  "iustitia.screen.keybinds.hint": "§7Bunlardan herhangi birini §fAyarlar → Kontroller → Iustitia§7 bölümünden yeniden bağla. Kırmızı = tuş çakışması.",
   "iustitia.screen.keybinds.title": "Iustitia — kısayol merkezi",
   "iustitia.screen.keybinds.unregistered": "§ckayıtlı değil",
   "iustitia.screen.playerHistory.checkFilter": "§7[§fDenetim: %s§7]",

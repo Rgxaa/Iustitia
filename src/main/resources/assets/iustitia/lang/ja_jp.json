@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8(読み取り不可)",
   "iustitia.screen.keybinds.conflict": "§c⚠ 以下と競合: §f%s",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§lキー割り当てハブ",
-  "iustitia.screen.keybinds.hint": "§7再割り当ては §fオプション → 操作 → その他§7 で行えます。赤 = キーの競合。",
+  "iustitia.screen.keybinds.hint": "§7再割り当ては §fオプション → 操作 → Iustitia§7 で行えます。赤 = キーの競合。",
   "iustitia.screen.keybinds.title": "Iustitia — キー割り当てハブ",
   "iustitia.screen.keybinds.unregistered": "§c未登録",
   "iustitia.screen.playerHistory.checkFilter": "§7[§fチェック: %s§7]",

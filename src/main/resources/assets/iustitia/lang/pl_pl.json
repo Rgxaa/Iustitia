@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8(nieczytelny)",
   "iustitia.screen.keybinds.conflict": "§c⚠ koliduje z §f%s",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§lCentrum skrótów",
-  "iustitia.screen.keybinds.hint": "§7Zmień dowolne z nich w §fOpcje → Sterowanie → Różne§7. Czerwony = konflikt klawiszy.",
+  "iustitia.screen.keybinds.hint": "§7Zmień dowolne z nich w §fOpcje → Sterowanie → Iustitia§7. Czerwony = konflikt klawiszy.",
   "iustitia.screen.keybinds.title": "Iustitia — centrum skrótów",
   "iustitia.screen.keybinds.unregistered": "§cniezarejestrowany",
   "iustitia.screen.playerHistory.checkFilter": "§7[§fSprawdzenie: %s§7]",

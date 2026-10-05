@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8(illeggibile)",
   "iustitia.screen.keybinds.conflict": "§c⚠ in conflitto con §f%s",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§lGestione tasti",
-  "iustitia.screen.keybinds.hint": "§7Riassegna uno di questi in §fOpzioni → Comandi → Varie§7. Rosso = conflitto di tasto.",
+  "iustitia.screen.keybinds.hint": "§7Riassegna uno di questi in §fOpzioni → Comandi → Iustitia§7. Rosso = conflitto di tasto.",
   "iustitia.screen.keybinds.title": "Iustitia — gestione tasti",
   "iustitia.screen.keybinds.unregistered": "§cnon registrato",
   "iustitia.screen.playerHistory.checkFilter": "§7[§fCheck: %s§7]",

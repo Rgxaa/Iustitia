@@ -557,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8(ilegível)",
   "iustitia.screen.keybinds.conflict": "§c⚠ conflita com §f%s",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§lTeclas de atalho",
-  "iustitia.screen.keybinds.hint": "§7Reatribua qualquer uma em §fOpções → Controles → Diversos§7. Vermelho = conflito de tecla.",
+  "iustitia.screen.keybinds.hint": "§7Reatribua qualquer uma em §fOpções → Controles → Iustitia§7. Vermelho = conflito de tecla.",
   "iustitia.screen.keybinds.title": "Iustitia — teclas de atalho",
   "iustitia.screen.keybinds.unregistered": "§cnão registrada",
   "iustitia.screen.playerHistory.checkFilter": "§7[§fCheck: %s§7]",
