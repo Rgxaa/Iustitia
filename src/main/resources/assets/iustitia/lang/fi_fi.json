@@ -1,4 +1,5 @@
 {
+  "key.category.iustitia.keybinds": "Iustitia",
   "iustitia.alert.batchLine": "§8[§diustitia§8] §f%s §%s(%s) §7(viimeisen %ss aikana)",
   "iustitia.alert.clickForHistory": "\n§7napsauta nähdäksesi merkintähistorian",
   "iustitia.alert.compactLine": "§8[§diustitia§8] §f%s §%s%s §7vl%s",

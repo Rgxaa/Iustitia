@@ -1,4 +1,5 @@
 {
+  "key.category.iustitia.keybinds": "Iustitia",
   "iustitia.alert.batchLine": "§8[§diustitia§8] §f%s §%s(%s) §7(直近 %s秒)",
   "iustitia.alert.clickForHistory": "\n§7クリックでフラグ履歴",
   "iustitia.alert.compactLine": "§8[§diustitia§8] §f%s §%s%s §7vl%s",

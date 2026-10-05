@@ -1,4 +1,5 @@
 {
+  "key.category.iustitia.keybinds": "Iustitia",
   "iustitia.alert.batchLine": "§8[§diustitia§8] §f%s §%s(%s) §7(за %ss)",
   "iustitia.alert.clickForHistory": "\n§7щёлкните — история флагов",
   "iustitia.alert.compactLine": "§8[§diustitia§8] §f%s §%s%s §7vl%s",

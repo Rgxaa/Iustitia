@@ -1,4 +1,5 @@
 {
+  "key.category.iustitia.keybinds": "Iustitia",
   "iustitia.alert.batchLine": "§8[§diustitia§8] §f%s §%s(%s) §7(last %ss)",
   "iustitia.alert.clickForHistory": "\n§7click for flag history",
   "iustitia.alert.compactLine": "§8[§diustitia§8] §f%s §%s%s §7vl%s",
@@ -556,7 +557,7 @@
   "iustitia.screen.clips.unreadable": "§8(unreadable)",
   "iustitia.screen.keybinds.conflict": "§c⚠ conflicts with §f%s",
   "iustitia.screen.keybinds.header": "§8[§diustitia§8] §f§lKeybind hub",
-  "iustitia.screen.keybinds.hint": "§7Rebind any of these in §fOptions → Controls → Miscellaneous§7. Red = key conflict.",
+  "iustitia.screen.keybinds.hint": "§7Rebind any of these in §fOptions → Controls → Iustitia§7. Red = key conflict.",
   "iustitia.screen.keybinds.title": "Iustitia — keybind hub",
   "iustitia.screen.keybinds.unregistered": "§cunregistered",
   "iustitia.screen.playerHistory.checkFilter": "§7[§fCheck: %s§7]",
