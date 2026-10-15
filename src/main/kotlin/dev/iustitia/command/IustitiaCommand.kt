@@ -1665,18 +1665,18 @@ object IustitiaCommand {
         val name = StringArgumentType.getString(ctx, "name")
         val template = dev.iustitia.config.PresetManager.template(name)
         if (template == null) {
-            send(ctx, "$tag §cno preset §f$name§7 (list with §f/ius presets§7).")
+            send(ctx, L10n.s("iustitia.cmd.presetExportNoPreset", tag, name))
             return 0
         }
         val text = dev.iustitia.config.PresetShare.encode(name, template)
-        if (text == null) { send(ctx, "$tag §cfailed to encode preset §f$name§7."); return 0 }
+        if (text == null) { send(ctx, L10n.s("iustitia.cmd.presetExportEncodeFail", tag, name)); return 0 }
         try { MinecraftClient.getInstance().keyboard.setClipboard(text) } catch (_: Throwable) {
-            send(ctx, "$tag §cfailed to write clipboard."); return 0
+            send(ctx, L10n.s("iustitia.cmd.presetExportClipFail", tag)); return 0
         }
         // The chat box takes 256 chars; "/ius presets import " uses 20 of them.
-        val how = if (text.length <= 256 - "/ius presets import ".length) "§f/ius presets import <string>§7, or bare §f/ius presets import§7 with it on the clipboard"
-        else "bare §f/ius presets import§7 with it on the clipboard §8(too long to type into chat)"
-        send(ctx, "$tag §7preset §f$name§7 copied to clipboard as a share string §8(${text.length} chars)§7. The recipient runs $how.")
+        val how = if (text.length <= 256 - "/ius presets import ".length) L10n.s("iustitia.cmd.presetExportHowTyped")
+        else L10n.s("iustitia.cmd.presetExportHowClip")
+        send(ctx, L10n.s("iustitia.cmd.presetExportCopied", tag, name, text.length, how))
         return 1
     }
 
@@ -1685,32 +1685,32 @@ object IustitiaCommand {
     private fun presetImport(ctx: CommandContext<FabricClientCommandSource>, arg: String?): Int {
         val input = arg ?: try { MinecraftClient.getInstance().keyboard.clipboard } catch (_: Throwable) { null }
         if (input.isNullOrBlank()) {
-            send(ctx, "$tag §cnothing to import§7: pass the string, or copy it to the clipboard and run §f/ius presets import§7.")
+            send(ctx, L10n.s("iustitia.cmd.presetImportNothing", tag))
             return 0
         }
         val decoded = dev.iustitia.config.PresetShare.decode(input)
         if (decoded is dev.iustitia.config.PresetShare.Decoded.Failure) {
-            send(ctx, "$tag §ccouldn't import preset§7: ${decoded.reason.replace("§", "")}. Nothing was saved.")
+            send(ctx, L10n.s("iustitia.cmd.presetImportFail", tag, decoded.reason.replace("§", "")))
             return 0
         }
         val ok = decoded as dev.iustitia.config.PresetShare.Decoded.Success
         val name = ok.name
         return when (val r = dev.iustitia.config.PresetManager.saveImported(name, ok.config)) {
             is dev.iustitia.config.PresetManager.ImportResult.Saved -> {
-                send(ctx, "$tag §7imported preset §f$name§7 → §f${r.path}§7. Apply it with §f/ius preset $name§7.")
+                send(ctx, L10n.s("iustitia.cmd.presetImportOk", tag, name, r.path, name))
                 1
             }
             dev.iustitia.config.PresetManager.ImportResult.BuiltInName -> {
-                send(ctx, "$tag §c$name§7 is a built-in preset name, so it can't be imported over. Nothing was saved."); 0
+                send(ctx, L10n.s("iustitia.cmd.presetImportBuiltIn", tag, name)); 0
             }
             dev.iustitia.config.PresetManager.ImportResult.AlreadyExists -> {
-                send(ctx, "$tag §7you already have a custom preset §f$name§7. Delete it first with §f/ius deletepreset $name§7. Nothing was saved."); 0
+                send(ctx, L10n.s("iustitia.cmd.presetImportExists", tag, name, name)); 0
             }
             dev.iustitia.config.PresetManager.ImportResult.BadName -> {
-                send(ctx, "$tag §cpreset name isn't allowed§7. Nothing was saved."); 0
+                send(ctx, L10n.s("iustitia.cmd.presetImportBadName", tag)); 0
             }
             dev.iustitia.config.PresetManager.ImportResult.WriteFailed -> {
-                send(ctx, "$tag §cfailed to save preset §f$name§7 (disk error)."); 0
+                send(ctx, L10n.s("iustitia.cmd.presetImportWriteFail", tag, name)); 0
             }
         }
     }
