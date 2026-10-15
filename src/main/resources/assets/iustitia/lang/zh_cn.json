@@ -29,6 +29,8 @@
   "iustitia.cfg.option.burstSparks.desc": "新的等级相关警报触发时，在玩家眼部生成一束短暂的等级颜色（红/黄）粒子 — 战斗中的视觉标记提示。仅客户端（不发数据包）。仅渲染。",
   "iustitia.cfg.option.burstSparks.name": "粒子迸发",
   "iustitia.cfg.option.chatAlerts.desc": "聊天警报行的总开关。关闭 = 静默所有警报（检测与名牌等级照常运行）。等同于不带参数的 /ius alerts。",
+  "iustitia.cfg.option.creativeFlightExempt.name": "创造模式飞行豁免",
+  "iustitia.cfg.option.creativeFlightExempt.desc": "豁免合法创造/旁观飞行触发的移动类检测（fly、speed、long-jump、no-fall、backward-sprint、wall-sprint、step；旁观者还包含 phase）。战斗类检测照常运行。游戏模式取自 Tab 列表。关闭 = 人人接受检查（用于创造 PvP 测试服）。",
   "iustitia.cfg.option.chatAlerts.name": "聊天警报",
   "iustitia.cfg.option.chathistCapture.desc": "为 /ius chathist <user> / phrase / target 记录被追踪的其他玩家（不含你本人，也不含系统消息）的消息。按服务器分别保存：开启“跨会话持久化”后重连仍然保留，否则仅存于内存。内容按追加方式写入。",
   "iustitia.cfg.option.chathistCapture.name": "聊天记录捕获",

@@ -107,6 +107,13 @@ class SelfTestEntrypoint : FabricClientGameTest {
         Scenarios.legitHurtIdlessBystander(),
         Scenarios.legitHurtMobKnockback(),
         Scenarios.legitHitsWithoutSwingBystander(),
+        // Guard twins for the narrowed creative/spectator flight exemption (PR #37): the
+        // same drives as their survival twins, differing only in tab-list game mode.
+        CreativeFlightScenarios.legitCreativeFlight(),
+        CreativeFlightScenarios.legitSpectatorPhase(),
+        // Issue #35: sneaking at a ledge with the hitbox center past the edge -- `flyEnvelope`'s
+        // center-only footing read the stance as airborne and FlyB alerted on it.
+        Scenarios.legitSneakEdge(),
     )
 
     /**
@@ -118,6 +125,8 @@ class SelfTestEntrypoint : FabricClientGameTest {
         CheatCombat.reachLiquidBounce(),
         CheatCombat.reachVape(),
         CheatCombat.reachGhost(),
+        // Combat-intact proof for the flight exemption: the reachVape drive on CREATIVE.
+        CreativeFlightScenarios.cheatCreativeReach(),
         // The dig exemption's bypass proof: a reach module that also holds a fake dig open must
         // still be attributed and still alert.
         CheatCombat.reachDigging(),
@@ -198,6 +207,7 @@ class SelfTestEntrypoint : FabricClientGameTest {
         PresetScenarios.PresetDisabledGate(),
         PresetScenarios.PresetApplyCoverage(),
         PresetScenarios.PresetBuiltInCoverage(),
+        PresetScenarios.PresetShareRoundTrip(),
     )
 
     /**

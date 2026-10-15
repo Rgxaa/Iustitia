@@ -38,6 +38,7 @@ object YaclScreenBuilder {
                     .option(bool("iustitia.cfg.option.chatAlerts.name", "iustitia.cfg.option.chatAlerts.desc", { cfg.alertsEnabled }) { cfg.alertsEnabled = it })
                     .option(bool("iustitia.cfg.option.nametagPrefixes.name", "iustitia.cfg.option.nametagPrefixes.desc", { cfg.nametagPrefixes }) { cfg.nametagPrefixes = it })
                     .option(bool("iustitia.cfg.option.greenTick.name", "iustitia.cfg.option.greenTick.desc", { cfg.nametagGreenEnabled }) { cfg.nametagGreenEnabled = it })
+                    .option(bool("iustitia.cfg.option.creativeFlightExempt.name", "iustitia.cfg.option.creativeFlightExempt.desc", { cfg.creativeFlightExempt }) { cfg.creativeFlightExempt = it })
                     .build()
             )
             .group(
@@ -171,13 +172,20 @@ object YaclScreenBuilder {
             // Threshold max 200 covers the largest default (aimWrap 165) with headroom; the range
             // is now actually applied to the controller, so the field is slider/keyboard-bounded
             // instead of accepting any double (the previous helper ignored its min/max args).
-            .option(double("iustitia.cfg.option.threshold.name", "iustitia.cfg.option.threshold.desc", { cc.threshold }, 0.0, 200.0) { cc.threshold = it })
+            // Ratio thresholds use their own range so the field can't store an always-flag value
+            // ([ThresholdBounds], issue #32).
+            .option(thresholdOption(id, cc))
         // The fly group also carries the Fly(Blink) sub-signal's freeze window (additive field —
         // see [IustitiaConfig.blinkFreezeTicks]). Clamped to the same 5..200 range at use.
         if (id == "flyEnvelope") {
             b.option(int("iustitia.cfg.option.blinkFreezeTicks.name", "iustitia.cfg.option.blinkFreezeTicks.desc", { ConfigManager.config.blinkFreezeTicks }, 5, 200) { ConfigManager.config.blinkFreezeTicks = it })
         }
         return b.build()
+    }
+
+    private fun thresholdOption(id: String, cc: IustitiaConfig.CheckConfig): Option<Double> {
+        val r = ThresholdBounds.ratioRangeFor(id) ?: 0.0..200.0
+        return double("iustitia.cfg.option.threshold.name", "iustitia.cfg.option.threshold.desc", { cc.threshold }, r.start, r.endInclusive) { cc.threshold = it }
     }
 
     private fun bool(key: String, descKey: String, getter: () -> Boolean, vararg descArgs: Any?, setter: (Boolean) -> Unit): Option<Boolean> =

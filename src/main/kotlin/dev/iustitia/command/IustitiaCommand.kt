@@ -241,7 +241,18 @@ object IustitiaCommand {
                 .then(ClientCommandManager.argument("name", StringArgumentType.word())
                     .suggests { _, b -> suggestFiltered(b, dev.iustitia.config.PresetManager.listAll()); b.buildFuture() }
                     .executes { presetApply(it) }))
-            .then(ClientCommandManager.literal("presets").executes { presetList(it) })
+            .then(ClientCommandManager.literal("presets")
+                .executes { presetList(it) }
+                .then(ClientCommandManager.literal("export")
+                    .then(ClientCommandManager.argument("name", StringArgumentType.word())
+                        .suggests { _, b -> suggestFiltered(b, dev.iustitia.config.PresetManager.listAll()); b.buildFuture() }
+                        .executes { presetExport(it) }))
+                .then(ClientCommandManager.literal("import")
+                    // Bare form reads the clipboard: the chat box caps input at 256 chars, and a
+                    // heavily tuned preset's string can be longer than that.
+                    .executes { presetImport(it, null) }
+                    .then(ClientCommandManager.argument("string", StringArgumentType.greedyString())
+                        .executes { presetImport(it, StringArgumentType.getString(it, "string")) })))
             .then(ClientCommandManager.literal("createpreset")
                 .then(ClientCommandManager.argument("name", StringArgumentType.word())
                     .executes { presetCreate(it) }))
@@ -269,7 +280,11 @@ object IustitiaCommand {
                 .then(ClientCommandManager.argument("check", StringArgumentType.word())
                     .suggests { _, b -> suggestFiltered(b, checkIds); b.buildFuture() }
                     .then(ClientCommandManager.argument("value", DoubleArgumentType.doubleArg(0.0, 1000.0))
-                        .executes { threshold(it) })))
+                        .executes { threshold(it) })
+                    .then(ClientCommandManager.literal("default")
+                        .executes { thresholdDefault(it) })
+                    .then(ClientCommandManager.literal("reset")
+                        .executes { thresholdDefault(it) })))
             .then(ClientCommandManager.literal("clear")
                 .executes { clearUsage(it) }
                 .then(ClientCommandManager.literal("all").executes { clearAll(it) })
@@ -474,9 +489,34 @@ object IustitiaCommand {
         val id = StringArgumentType.getString(ctx, "check")
         if (id !in checkIds) { send(ctx, L10n.s("iustitia.cmd.unknownCheck", tag, id)); return 0 }
         val value = DoubleArgumentType.getDouble(ctx, "value")
+        // Ratio thresholds have a narrower range than the generic argument: 0 on throughWalls
+        // flags every fight (issue #32). Reject rather than clamp so the user sees why.
+        if (!dev.iustitia.config.ThresholdBounds.accepts(id, value)) {
+            val r = dev.iustitia.config.ThresholdBounds.rangeFor(id)
+            send(ctx, "$tag §c$id.threshold is a ratio; must be between ${r.start} and ${r.endInclusive} (got $value)")
+            return 0
+        }
         ConfigManager.config.slice(id).threshold = value
         ConfigManager.save()
         send(ctx, "$tag §7$id.threshold = $value")
+        return 1
+    }
+
+    private fun thresholdDefault(ctx: CommandContext<FabricClientCommandSource>): Int {
+        val id = StringArgumentType.getString(ctx, "check")
+        if (id !in checkIds) {
+            send(ctx, "$tag §cunknown check: $id")
+            return 0
+        }
+
+        // IustitiaConfig() is the single source of truth for shipped defaults.
+        val defaultThreshold = dev.iustitia.config.IustitiaConfig()
+            .slice(id)
+            .threshold
+
+        ConfigManager.config.slice(id).threshold = defaultThreshold
+        ConfigManager.save()
+        send(ctx, "$tag §7$id.threshold reset to default: §f$defaultThreshold")
         return 1
     }
 
@@ -1617,6 +1657,62 @@ object IustitiaCommand {
         if (ok) send(ctx, L10n.s("iustitia.cmd.presetCreateOk", tag, name, name))
         else send(ctx, L10n.s("iustitia.cmd.presetCreateFail", tag, name))
         return if (ok) 1 else 0
+    }
+
+    /** `/ius presets export <name>` — copy a built-in or custom preset to the clipboard as a
+     *  [dev.iustitia.config.PresetShare] string. Clipboard only; nothing is sent anywhere. */
+    private fun presetExport(ctx: CommandContext<FabricClientCommandSource>): Int {
+        val name = StringArgumentType.getString(ctx, "name")
+        val template = dev.iustitia.config.PresetManager.template(name)
+        if (template == null) {
+            send(ctx, "$tag §cno preset §f$name§7 (list with §f/ius presets§7).")
+            return 0
+        }
+        val text = dev.iustitia.config.PresetShare.encode(name, template)
+        if (text == null) { send(ctx, "$tag §cfailed to encode preset §f$name§7."); return 0 }
+        try { MinecraftClient.getInstance().keyboard.setClipboard(text) } catch (_: Throwable) {
+            send(ctx, "$tag §cfailed to write clipboard."); return 0
+        }
+        // The chat box takes 256 chars; "/ius presets import " uses 20 of them.
+        val how = if (text.length <= 256 - "/ius presets import ".length) "§f/ius presets import <string>§7, or bare §f/ius presets import§7 with it on the clipboard"
+        else "bare §f/ius presets import§7 with it on the clipboard §8(too long to type into chat)"
+        send(ctx, "$tag §7preset §f$name§7 copied to clipboard as a share string §8(${text.length} chars)§7. The recipient runs $how.")
+        return 1
+    }
+
+    /** `/ius presets import [string]` — validate a share string (from the argument, or the
+     *  clipboard when bare) and save it as a custom preset. Never applies it; never overwrites. */
+    private fun presetImport(ctx: CommandContext<FabricClientCommandSource>, arg: String?): Int {
+        val input = arg ?: try { MinecraftClient.getInstance().keyboard.clipboard } catch (_: Throwable) { null }
+        if (input.isNullOrBlank()) {
+            send(ctx, "$tag §cnothing to import§7: pass the string, or copy it to the clipboard and run §f/ius presets import§7.")
+            return 0
+        }
+        val decoded = dev.iustitia.config.PresetShare.decode(input)
+        if (decoded is dev.iustitia.config.PresetShare.Decoded.Failure) {
+            send(ctx, "$tag §ccouldn't import preset§7: ${decoded.reason.replace("§", "")}. Nothing was saved.")
+            return 0
+        }
+        val ok = decoded as dev.iustitia.config.PresetShare.Decoded.Success
+        val name = ok.name
+        return when (val r = dev.iustitia.config.PresetManager.saveImported(name, ok.config)) {
+            is dev.iustitia.config.PresetManager.ImportResult.Saved -> {
+                send(ctx, "$tag §7imported preset §f$name§7 → §f${r.path}§7. Apply it with §f/ius preset $name§7.")
+                1
+            }
+            dev.iustitia.config.PresetManager.ImportResult.BuiltInName -> {
+                send(ctx, "$tag §c$name§7 is a built-in preset name, so it can't be imported over. Nothing was saved."); 0
+            }
+            dev.iustitia.config.PresetManager.ImportResult.AlreadyExists -> {
+                send(ctx, "$tag §7you already have a custom preset §f$name§7. Delete it first with §f/ius deletepreset $name§7. Nothing was saved."); 0
+            }
+            dev.iustitia.config.PresetManager.ImportResult.BadName -> {
+                send(ctx, "$tag §cpreset name isn't allowed§7. Nothing was saved."); 0
+            }
+            dev.iustitia.config.PresetManager.ImportResult.WriteFailed -> {
+                send(ctx, "$tag §cfailed to save preset §f$name§7 (disk error)."); 0
+            }
+        }
     }
 
     /** `/ius deletepreset <name>` — delete a custom preset (built-ins can't be deleted). */

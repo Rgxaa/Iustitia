@@ -143,9 +143,8 @@ class TrackedPlayer(val uuid: UUID, var entityId: Int, val joinTick: Int) {
         get() = digActive && pos.squaredDistanceTo(digPos) <= DIG_ORPHAN_SQ
 
     /** Tick of the last tick this player actually moved (|delta|² >= 0.0001). Idle-since-join
-     *  players keep the default -10000 so they never inflate the EntityTrackerManager mass-
-     *  freeze (server-lag) signal — an AFK player frozen next to a Blinker must not exempt
-     *  the Blinker's snap. */
+     *  players keep the default -10000, so [dev.iustitia.tracking.LagCombatCorrelator] never
+     *  reads a standing AFK player as a self-induced (cheat) freeze. */
     var lastMoveTick: Int = -10000
 
     // --- observed status effects ---
@@ -165,11 +164,12 @@ class TrackedPlayer(val uuid: UUID, var entityId: Int, val joinTick: Int) {
     var tier: FlagHistory.Tier = FlagHistory.Tier.GREEN
 
     // --- per-tick world-query scratch (lazy, tick-stamped) ---
-    // Dedupes the shared world queries across the block-lookup movement checks (Spider /
-    // WallSprint / SprintHack): all three call isChunkLoaded on the player's chunk (3×→1) and
-    // Spider + SprintHack both call isLiquidAt at the feet block (2×→1), so a tracked player
-    // pays ONE chunk-loaded lookup + ONE feet-liquid lookup per tick, not 3 + 2. The expensive
-    // block-presence verdicts (Spider's wall loop, WallSprint's isWallAhead) are NOT shared
+    // Dedupes the shared world queries across the block-lookup checks (Spider / WallSprint /
+    // SprintHack, plus KillAura's movement(fix) ground gate): all four call isChunkLoaded on the
+    // player's chunk (4×→1) and Spider + SprintHack both call isLiquidAt at the feet block (2×→1),
+    // so a tracked player pays ONE chunk-loaded lookup + ONE feet-liquid lookup per tick, not 4 + 2.
+    // The expensive block-presence verdicts (Spider's wall loop, WallSprint's isWallAhead,
+    // KillAura's ice-ground check) are NOT shared
     // (different geometry) — they are rate-limited per-check via verdict-caching instead.
     // Single-threaded client tick → no synchronization. Scratch only — not detection state.
     private var wqTick: Int = Int.MIN_VALUE

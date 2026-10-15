@@ -237,6 +237,7 @@ object ConfigManager {
         "mutedPlayers",       // per-user session mutes
         "wizardCompleted",    // one-shot first-launch gate
         "persistenceEnabled", // environmental preference, not part of a detection/display profile
+        "creativeFlightExempt", // environmental preference (server-specific: creative-PvP testing flips it off)
         "playclipMode",       // user-controlled generation selector (see IustitiaConfig.playclipMode)
     )
 
@@ -269,6 +270,7 @@ object ConfigManager {
         addProperty("joinGraceTicks", c.joinGraceTicks)
         addProperty("legitScaffoldStrictGates", c.legitScaffoldStrictGates)
         addProperty("sensitivitySubstrate", c.sensitivitySubstrate)
+        addProperty("creativeFlightExempt", c.creativeFlightExempt)
         addProperty("alertsEnabled", c.alertsEnabled)
         addProperty("nametagPrefixes", c.nametagPrefixes)
         addProperty("nametagGreenEnabled", c.nametagGreenEnabled)
@@ -365,6 +367,9 @@ object ConfigManager {
         // sensitivitySubstrate: additive — a pre-field config keeps the default (off = substrate
         // dropped, the dense-crowd FPS fix). No CONFIG_VERSION bump (not a check-calibration field).
         if (o.has("sensitivitySubstrate")) c.sensitivitySubstrate = o.get("sensitivitySubstrate").asBoolean
+        // creativeFlightExempt: additive — a pre-field config keeps the default (on). No
+        // CONFIG_VERSION bump (not a check-calibration field).
+        if (o.has("creativeFlightExempt")) c.creativeFlightExempt = o.get("creativeFlightExempt").asBoolean
         if (o.has("alertsEnabled")) c.alertsEnabled = o.get("alertsEnabled").asBoolean
         if (o.has("nametagPrefixes")) c.nametagPrefixes = o.get("nametagPrefixes").asBoolean
         if (o.has("nametagGreenEnabled")) c.nametagGreenEnabled = o.get("nametagGreenEnabled").asBoolean
@@ -425,17 +430,22 @@ object ConfigManager {
         // default (30). No CONFIG_VERSION bump.
         if (o.has("blinkFreezeTicks")) c.blinkFreezeTicks = o.get("blinkFreezeTicks").asInt
         for ((key, cc) in c.checks()) {
-            if (o.has(key)) readCheck(o.getAsJsonObject(key), cc, resetCalibration)
+            if (o.has(key)) readCheck(key, o.getAsJsonObject(key), cc, resetCalibration)
         }
     }
 
-    private fun readCheck(o: JsonObject, cc: IustitiaConfig.CheckConfig, resetCalibration: Boolean) {
+    private fun readCheck(id: String, o: JsonObject, cc: IustitiaConfig.CheckConfig, resetCalibration: Boolean) {
         try {
             if (o.has("enabled")) cc.enabled = o.get("enabled").asBoolean
             if (resetCalibration) return // keep code-default setbackVL/decay/threshold (migration)
             if (o.has("setbackVL")) cc.setbackVL = o.get("setbackVL").asDouble
             if (o.has("decay")) cc.decay = o.get("decay").asDouble
-            if (o.has("threshold")) cc.threshold = o.get("threshold").asDouble
+            // An out-of-range ratio threshold (e.g. a hand-edited throughWalls 0, which flags
+            // every fight) keeps the default instead — see [ThresholdBounds], issue #32.
+            if (o.has("threshold")) {
+                val t = o.get("threshold").asDouble
+                if (ThresholdBounds.accepts(id, t)) cc.threshold = t
+            }
         } catch (_: Throwable) {
             // ignore per-field errors
         }
